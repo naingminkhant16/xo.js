@@ -4,6 +4,8 @@ const playAgainDiv = document.getElementById('play-again')
 const turnLabel = document.getElementById("turn-label")
 const resultLabel = document.getElementById("result-label")
 
+const img = document.getElementById("img")
+
 const cells = [
     document.getElementById('cell-1'),
     document.getElementById('cell-2'),
@@ -20,5 +22,6 @@ export {
     playAgainDiv,
     cells,
     turnLabel,
-    resultLabel
+    resultLabel,
+    img
 }

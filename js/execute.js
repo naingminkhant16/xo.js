@@ -2,9 +2,12 @@ import {
     allCell,
     playAgainDiv,
     resultLabel,
-    turnLabel
+    turnLabel,
+    img
 } from './selector'
 
+//import img json
+import imgJsonData from "../img.json"
 
 let sign = true //sign true for 'O' and false for 'X'
 const arrO = [] //clicked cell arr for 'O'
@@ -98,10 +101,18 @@ function checkResult(arr) {
         //disable click on all cell
         allCell.forEach(i => i.style.pointerEvents = "none")
 
+        //show img
+        img.style.display = "block"
+        img.src = imgJsonData.win
+
         //create and show play again btn
         createPlayAgainBtn()
     } else if (arrO.length === 5 && arrX.length === 4) { //draw case
         resultLabel.textContent = "Match is Draw"
+        //show img
+        img.style.display = "block"
+        img.src = imgJsonData.draw
+
         createPlayAgainBtn()
     }
 
