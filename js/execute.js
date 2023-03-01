@@ -13,86 +13,47 @@ let sign = true //sign true for 'O' and false for 'X'
 const arrO = [] //clicked cell arr for 'O'
 const arrX = [] //clicked cell arr for 'X'
 
+//winningProbabilityCells
+const winningProbabilityCells = [
+    [1, 2, 3],
+    [1, 5, 9],
+    [1, 4, 7],
+    [4, 5, 6],
+    [7, 8, 9],
+    [2, 5, 8],
+    [3, 6, 9],
+    [7, 5, 3]
+]
+
+
+//function to call for cell click event listener
+export function executeXO(cell, cellNum) {
+    if (sign) { //for O
+        arrO.push(cellNum) //store clicked cell to arr O
+        cell.textContent = "O"
+
+        checkResult(arrO)
+        //change turn label to X cuz O turn is finished
+        turnLabel.textContent = "X"
+    } else { //for X
+        arrX.push(cellNum) //store clicked cell to arr X
+        cell.textContent = "X"
+
+        checkResult(arrX)
+        //change turn label to O cuz X turn is finished
+        turnLabel.textContent = "O"
+    }
+
+    //disable click event
+    cell.style.pointerEvents = "none"
+    sign = !sign
+}
+
 //check the result if the game win
 function checkResult(arr) {
-    let res;
-    arr.forEach(item => {
-        switch (item) {
-            case 1:
-                res = [
-                    multipleInArray(arr, [2, 3]),
-                    multipleInArray(arr, [5, 9]),
-                    multipleInArray(arr, [4, 7])
-                ]
-                break
-
-            case 2:
-                res = [
-                    multipleInArray(arr, [1, 3]),
-                    multipleInArray(arr, [5, 8])
-                ]
-                break
-
-            case 3:
-                res = [
-                    multipleInArray(arr, [1, 2]),
-                    multipleInArray(arr, [5, 7]),
-                    multipleInArray(arr, [6, 9])
-                ]
-                break
-
-            case 4:
-                res = [
-                    multipleInArray(arr, [1, 7]),
-                    multipleInArray(arr, [5, 6]),
-                ]
-                break
-
-            case 5:
-                res = [
-                    multipleInArray(arr, [1, 9]),
-                    multipleInArray(arr, [3, 7]),
-                    multipleInArray(arr, [2, 8]),
-                    multipleInArray(arr, [4, 6])
-                ]
-                break
-
-            case 6:
-                res = [
-                    multipleInArray(arr, [3, 9]),
-                    multipleInArray(arr, [5, 4]),
-                ]
-                break
-
-            case 7:
-                res = [
-                    multipleInArray(arr, [1, 4]),
-                    multipleInArray(arr, [5, 3]),
-                    multipleInArray(arr, [8, 9])
-                ]
-                break
-
-            case 8:
-                res = [
-                    multipleInArray(arr, [2, 5]),
-                    multipleInArray(arr, [7, 9])
-                ]
-                break
-
-            case 9:
-                res = [
-                    multipleInArray(arr, [3, 6]),
-                    multipleInArray(arr, [1, 5]),
-                    multipleInArray(arr, [7, 8]),
-                ]
-                break
-            default:
-                res = [false]
-        }
-    })
-
     // win case
-    if (res.includes(true)) {
+    //this function will return true if the arr given is included in winning probability cells arr
+    if (executeResult(arr)) {
 
         let winner = sign ? "O" : "X"
 
@@ -118,6 +79,19 @@ function checkResult(arr) {
 
 }
 
+//true will return if the arr given is included in winning probability, othrewise false
+function executeResult(arr) {
+    return winningProbabilityCells.map(i => {
+        return multipleInArray(arr, i)
+    }).includes(true)
+}
+
+function multipleInArray(arr, values) {
+    return values.every(value => {
+        return arr.includes(value)
+    });
+}
+
 function createPlayAgainBtn() {
     const playAgainBtn = document.createElement("button")
     playAgainBtn.textContent = "Play Again"
@@ -132,33 +106,4 @@ function createPlayAgainBtn() {
         //reload page
         window.location.href = "/"
     })
-}
-
-function multipleInArray(arr, values) {
-    return values.every(value => {
-        return arr.includes(value)
-    });
-}
-
-//function to call for cell click event listener
-export function executeXO(cell, cellNum) {
-    if (sign) { //for O
-        arrO.push(cellNum) //store clicked cell to arr O
-        cell.textContent = "O"
-
-        checkResult(arrO)
-        //change turn label to X cuz O turn is finished
-        turnLabel.textContent = "X"
-    } else { //for X
-        arrX.push(cellNum) //store clicked cell to arr X
-        cell.textContent = "X"
-
-        checkResult(arrX)
-        //change turn label to O cuz X turn is finished
-        turnLabel.textContent = "O"
-    }
-
-    //disable click event
-    cell.style.pointerEvents = "none"
-    sign = !sign
 }
