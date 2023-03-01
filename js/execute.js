@@ -20,70 +20,70 @@ function checkResult(arr) {
         switch (item) {
             case 1:
                 res = [
-                    arr.includes(2) && arr.includes(3),
-                    arr.includes(5) && arr.includes(9),
-                    arr.includes(4) && arr.includes(7)
+                    multipleInArray(arr, [2, 3]),
+                    multipleInArray(arr, [5, 9]),
+                    multipleInArray(arr, [4, 7])
                 ]
                 break
 
             case 2:
                 res = [
-                    arr.includes(1) && arr.includes(3),
-                    arr.includes(5) && arr.includes(8)
+                    multipleInArray(arr, [1, 3]),
+                    multipleInArray(arr, [5, 8])
                 ]
                 break
 
             case 3:
                 res = [
-                    arr.includes(1) && arr.includes(2),
-                    arr.includes(5) && arr.includes(7),
-                    arr.includes(6) && arr.includes(9)
+                    multipleInArray(arr, [1, 2]),
+                    multipleInArray(arr, [5, 7]),
+                    multipleInArray(arr, [6, 9])
                 ]
                 break
 
             case 4:
                 res = [
-                    arr.includes(1) && arr.includes(7),
-                    arr.includes(5) && arr.includes(6)
+                    multipleInArray(arr, [1, 7]),
+                    multipleInArray(arr, [5, 6]),
                 ]
                 break
 
             case 5:
                 res = [
-                    arr.includes(1) && arr.includes(9),
-                    arr.includes(3) && arr.includes(7),
-                    arr.includes(2) && arr.includes(8),
-                    arr.includes(4) && arr.includes(6)
+                    multipleInArray(arr, [1, 9]),
+                    multipleInArray(arr, [3, 7]),
+                    multipleInArray(arr, [2, 8]),
+                    multipleInArray(arr, [4, 6])
                 ]
                 break
 
             case 6:
                 res = [
-                    arr.includes(3) && arr.includes(9),
-                    arr.includes(5) && arr.includes(4)
+                    multipleInArray(arr, [3, 9]),
+                    multipleInArray(arr, [5, 4]),
                 ]
                 break
 
             case 7:
                 res = [
-                    arr.includes(1) && arr.includes(4),
-                    arr.includes(5) && arr.includes(3),
-                    arr.includes(8) && arr.includes(9)
+                    multipleInArray(arr, [1, 4]),
+                    multipleInArray(arr, [5, 3]),
+                    multipleInArray(arr, [8, 9])
                 ]
                 break
 
             case 8:
                 res = [
-                    arr.includes(2) && arr.includes(5),
-                    arr.includes(7) && arr.includes(9)
+                    multipleInArray(arr, [2, 5]),
+                    multipleInArray(arr, [7, 9])
                 ]
                 break
 
             case 9:
                 res = [
-                    arr.includes(3) && arr.includes(6),
-                    arr.includes(1) && arr.includes(5),
-                    arr.includes(7) && arr.includes(8)
+                    multipleInArray(arr, [3, 6]),
+                    multipleInArray(arr, [1, 5]),
+                    multipleInArray(arr, [7, 8]),
                 ]
                 break
             default:
@@ -132,6 +132,12 @@ function createPlayAgainBtn() {
         //reload page
         window.location.href = "/"
     })
+}
+
+function multipleInArray(arr, values) {
+    return values.every(value => {
+        return arr.includes(value)
+    });
 }
 
 //function to call for cell click event listener
